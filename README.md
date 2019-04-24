@@ -2,7 +2,7 @@
 This is a Game Sample Menu based on MenuTemplate project available on [Hasenfresser](https://github.com/Hasenfresser/MenuTemplate). This is 
 an easy template for simple menus in Linux and Windows terminals.
 
-
+    
 # Download and Compilation
 
 First, clone the repository using the command line below:
