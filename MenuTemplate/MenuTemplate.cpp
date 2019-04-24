@@ -528,7 +528,8 @@ string MenuTemplate::getCursor(){
     return this->Cursor;
 }
 
-
+// Q4) Adicionar suporte para quantidade de caracteres para o Cursor
+// não adicionado comentários    
 void MenuTemplate::setCursorLength(const int CursorLength){
     this->CursorLength = CursorLength;
 }
