@@ -10,11 +10,24 @@ First, clone the repository using the command line below:
 
 To compile this project you should use the command line below:
 
-> g++ main.cpp MenuTemplate/MenuTemplate.cpp MenuTemplate/Entry.cpp MenuTemplate/ExternFunctions/getChar.cpp -o GameMenu
+>  g++ main.cpp MenuTemplate/MenuTemplate.cpp MenuTemplate/Entry.cpp MenuTemplate/ExternFunctions/getChar.cpp -o GameMenu
 
 # Linux directive
 
 if you use Linux system operation you must use the ``#define LINUX`` to be abble to compile using C++. In other case (using Windows) you must not change anyone directive because the original project is compile with this strategy.
+
+To find out where it is need to change the directive you can use the command below that uses a regex with grep to show which files uses the directive for WINDOWS.
+
+```
+$ grep -iaR '#define WINDOWS'
+
+MenuTemplate/MenuTemplate.hpp:#define WINDOWS
+MenuTemplate/ExternFunctions/getChar.hpp:#define WINDOWS
+```
+
+Using `$ grep -ianR '#define WINDOWS` you can see the line number too.
+
+
 
 ## Actual version 2.00 (2019-04-24):
 
