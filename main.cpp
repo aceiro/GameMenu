@@ -26,10 +26,14 @@ int main() {
     MenuA.Description = "Choose with UP and DOWN, select with RETURN!";
     MenuA.setCursor("> ");
 
-    MenuA.addEntry("GAME_NEW", "New game");
-    MenuA.addEntry("GAME_LOAD", "Load save state");
-    MenuA.addEntry("GAME_EXIT", "Exit game");
-    MenuA.addEntry("GAME_OPTIONS", "Game options");
+    // Q1) Adicionar novos itens para o GameMenu
+    MenuA.addEntry("GAME_NEW"     ,  "New game");
+    MenuA.addEntry("GAME_LOAD"    ,  "Load save state");
+    MenuA.addEntry("GAME_EXIT"    ,  "Exit game");
+    MenuA.addEntry("GAME_OPTIONS" ,  "Game options");
+    MenuA.addEntry("GAME_VIDEO"   ,  "Video options");
+    MenuA.addEntry("GAME_SOUND"   ,  "Sound options");
+    MenuA.addEntry("GAME_CONTROLS",  "Controls");
 
     MenuA.swapEntries(2, "GAME_OPTIONS");
 
