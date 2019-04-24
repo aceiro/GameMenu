@@ -527,4 +527,15 @@ int MenuTemplate::getNumberOfEntries() {
 string MenuTemplate::getCursor(){
     return this->Cursor;
 }
+
+
+void MenuTemplate::setCursorLength(const int CursorLength){
+    this->CursorLength = CursorLength;
+}
+
+int MenuTemplate::getCursorLength(){
+    return this->CursorLength;
+}
+
+
 } // end namespace

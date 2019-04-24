@@ -26,6 +26,7 @@ int main() {
     MenuA.Title = "\t\tNeverwinter Nights Simple Menu";
     MenuA.Description = "Choose with UP and DOWN, select with RETURN!";
     MenuA.setCursor("> ");
+    MenuA.setCursorLength( MenuA.getCursor().length() );
 
     // Q1) Adicionar novos itens para o GameMenu
     MenuA.addEntry("GAME_NEW"     ,  "New game");
@@ -42,4 +43,5 @@ int main() {
 
     cout << "Menu Key: " << MenuA.displayGetName() << endl;
     cout << "Cursor String type: " << MenuA.getCursor() << endl;
+    cout << "Cursor Length: " << MenuA.getCursorLength() << endl;
 }

@@ -145,6 +145,16 @@ private:
     //!
     string Cursor = "> ";
 
+
+    //!
+    //! @brief      Cursor length
+    //!
+    //! Length used to represents cursor size
+    //!
+    int CursorLength;
+
+
+
     //!
     //! @brief      List of all menu entries.
     //!
@@ -364,5 +374,10 @@ private:
     //! Size is always a value from 0 to number of entries.
     //!
     int getNumberOfEntries();
+
+
+    void setCursorLength(const int CursorLength);
+
+    int getCursorLength();
 };
 } // end namespace
