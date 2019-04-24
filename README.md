@@ -1,6 +1,24 @@
-# MenuTemplate
-An easy template for simple menus in Linux and Windows terminals.
+# Game Menu
+This is a Game Sample Menu based on MenuTemplate project available on [Hasenfresser](https://github.com/Hasenfresser/MenuTemplate). This is 
+an easy template for simple menus in Linux and Windows terminals.
 
+
+# Download and Compilation
+
+First, clone the repository using the command line below:
+> git clone https://github.com/aceiro/GameMenu.git
+
+To compile this project you should use the command line below:
+
+> g++ main.cpp MenuTemplate/MenuTemplate.cpp MenuTemplate/Entry.cpp MenuTemplate/ExternFunctions/getChar.cpp -o GameMenu
+
+# Linux directive
+
+if you use Linux system operation you must use the ``#define LINUX`` to be abble to compile using C++. In other case (using Windows) you must not change anyone directive because the original project is compile with this strategy.
+
+## Actual version 2.00 (2019-04-24):
+
+First commit to be eable to use in lessons and C++ course in the year 2019.
 
 ## Actual version 1.04 (2017-12-28):
 Changed Doxygen comments to C++ style.
