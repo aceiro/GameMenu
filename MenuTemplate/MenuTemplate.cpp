@@ -518,4 +518,13 @@ int MenuTemplate::displayGetPosition() {
 int MenuTemplate::getNumberOfEntries() {
     return Entries.size();
 }
+
+// Q3) A classe MenuTemplate possui inúmeros métodos (ver arquivo MenuTemplate.hpp).
+// Contudo, nem todos os métodos foram implementados. Um deles é o método getCursor() que retorna
+// a string associada com o cursor definido inicialmente. Sua atividade aqui nessa questão é implementar
+// essa rotina getCursor para retornar e então exibi-la no programa main.cpp.
+
+string MenuTemplate::getCursor(){
+    return this->Cursor;
+}
 } // end namespace

@@ -40,5 +40,6 @@ int main() {
 
     MenuA.setCursorStartPosition(2);
 
-    cout << MenuA.displayGetName() << endl;
+    cout << "Menu Key: " << MenuA.displayGetName() << endl;
+    cout << "Cursor String type: " << MenuA.getCursor() << endl;
 }
