@@ -22,7 +22,8 @@ int main() {
     // Example menu for a game:
     MenuTemplate::MenuTemplate MenuA;
 
-    MenuA.Title = "\t\tMenuTemplate 1.04";
+    // Q2) Modificar a descrição do Menu do game para “Neverwinter Nights Simple Menu”
+    MenuA.Title = "\t\tNeverwinter Nights Simple Menu";
     MenuA.Description = "Choose with UP and DOWN, select with RETURN!";
     MenuA.setCursor("> ");
 
