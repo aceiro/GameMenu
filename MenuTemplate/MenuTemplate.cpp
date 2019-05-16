@@ -48,9 +48,15 @@ void MenuTemplate::clearScreen() {
     #endif
 }
 
+// Q5) (continua Passo [5/6])
+void MenuTemplate::setCursor(const string &Cursor, const bool isUnicode){
+    this->isUnicode = isUnicode;
+    setCursor(Cursor);
+}
+
 void MenuTemplate::addEntry(const string &Name, const string &Text) {
     // Calling addEntry with new entry at end (position = number of entries) of menu.
-    addEntry(Name, Text, Entries.size());
+     addEntry(Name, Text, Entries.size()); 
 }
 
 void MenuTemplate::addEntry(const string &Name, const string &Text, const int &Position) {
@@ -69,11 +75,81 @@ void MenuTemplate::addEntry(const string &Name, const string &Text, const int &P
                 throw string("Entry name must be unique!\nTriggering entry name: " + Name);
 
         // If Position is smaller than 0 or bigger than number of entries, adding new entry at the end.
-        if(Position < 0 or Position > Entries.size())
+        if(Position < 0 or Position > Entries.size()){
             Entries.push_back(Entry(Name, Text));
+        }
         // If not, insert new entry at Position
-        else
-            Entries.insert(Entries.begin() + Position, Entry(Name, Text));
+        else{
+    
+           Entries.insert(Entries.begin() + Position, Entry(Name, Text));
+           
+        }
+    }
+    catch(string Exception) {
+        cout << Exception << endl;
+        cin.get();
+        clearScreen();
+    }
+}
+
+void MenuTemplate::addEntry_Q6(const string &Name, const string &Text) {
+    // Calling addEntry with new entry at end (position = number of entries) of menu.
+    
+    // Q6) usado para controlar o menu circular
+    //     se for menor que over-limit então faz o que já fazia
+    //     senão adiciona no início
+    this->CursorPositionMenu = Entries.size();
+    if( this->CursorPositionMenu < this->LimitEntriesPerMenu ){
+        addEntry_Q6(Name, Text, Entries.size()); 
+    }else {
+        this->CursorPositionMenu = this->CursorStartPosition;
+        addEntry_Q6(Name, Text, this->CursorPositionMenu);
+    }
+}
+
+
+void MenuTemplate::addEntry_Q6(const string &Name, const string &Text, const int &Position) {
+    try {
+        // Testing, if Name is empty. If true: exception.
+        if(Name.empty())
+            throw string("Entry name must not be empty!");
+
+        // Testing, if Text is emptry. If true: exception.
+        if(Text.empty())
+            throw string("Entry text must not be empty!");
+
+        // Testing, if Name is unique. If false: exception
+        for(int Counter = 0; Counter < Entries.size(); ++Counter)
+            if(Entries[Counter].getName() == Name)
+                throw string("Entry name must be unique!\nTriggering entry name: " + Name);
+
+        // If Position is smaller than 0 or bigger than number of entries, adding new entry at the end.
+        if(Position < 0 or Position > Entries.size()){
+            Entries.push_back(Entry(Name, Text));
+        }
+        // If not, insert new entry at Position
+        else{
+           
+           // Q6) 
+           // Comentários:
+           // -------------------------------------------------------- 
+           // Para essa solução é importante conhecer o conceito de Lista circular
+           // veja o exemplo abaixo.
+           // over-limit = 4 
+           //  v: [ A -> B -> C -> D  over-limit A -> B -> C -> D ]
+           //  i:   0    1    2    3             0    1    2    3  
+           //  SE inserção for > que over-limit ENTAO
+           //     insere no início
+           //     atualiza referencias
+           //  FIM-SE   
+
+           cout << " " <<  CursorPositionMenu;
+           cout << " " <<  (Entries.size() == LimitEntriesPerMenu);
+           if ( Entries.size() == LimitEntriesPerMenu ){
+            Entries.erase(Entries.begin() + CursorPositionMenu);
+           }  
+           Entries.insert(Entries.begin() + Position, Entry(Name, Text));
+        }
     }
     catch(string Exception) {
         cout << Exception << endl;
@@ -484,10 +560,22 @@ int MenuTemplate::displayGetPosition() {
             for(int CounterA = 0; CounterA < Entries.size(); ++CounterA) {
                 if(CounterA == SelectedEntryPosition)
                     cout << Cursor;
-                else
-                    for(int CounterB = 0; CounterB < Cursor.length(); ++CounterB)
-                        cout << ' ';
+                else{
+                    //////////////////////////////////////////
+                    // Q5) alteração principal
+                    //     Passo Final [6/6]
+                    //////////////////////////////////////////
+                    int total = Cursor.length();
+                    if( isUnicode ){
+                        total = total - 2;
+                    }else {
+                        /* doNothing() */
+                        /* comentar if...else e remover*/
+                    }
 
+                    for(int CounterB = 0; CounterB < total; ++CounterB)
+                        cout << ' ';
+                }
                 cout << Entries[CounterA].getText() << endl;
             }
 
@@ -524,6 +612,41 @@ int MenuTemplate::getNumberOfEntries() {
 // a string associada com o cursor definido inicialmente. Sua atividade aqui nessa questão é implementar
 // essa rotina getCursor para retornar e então exibi-la no programa main.cpp.
 
+// Comentário:
+// ----------------------------------------------------
+// Observe atentamente a Figura abaixo
+// 
+//               
+//       <<abstração>>               <<implementação>>
+//   +-------------------+        +-------------------+
+//   |  MenuTemplate.hpp |  <---- |  MenuTemplate.cpp | 
+//   +-------------------+        +-------------------+
+//   |     getCursor()   |                ^
+//   +-------------------+                |
+//                                        |
+//                                        |
+//   +-------------------+                |  
+//   |     Main.cpp      | ---------------/  
+//   +-------------------+ 
+//
+// A Figura anterior ilustra o mecanismo usado pelo MenuTemplate
+// para isolar e ao mesmo tempo implementar em uma classe separada
+// o comportamento (ação) do método getCursor(). Note que a classe
+// cpp (implementa) uma ideia geral (abstração) do que será o método
+// getCursor(). Esse conceito em POO é definição como separação de
+// interesses ou em inglês "Separation of Concern" - SoC. Existem
+// algumas vantagens sobre esse uso.
+//
+// Vantagens
+//   - Separação de abstração da implementação
+//   - Cada desenvolver pode implementar a sua maneira
+//   - Existe um modelo a ser seguido fornecido pela abstração
+//   - Usao em micro-serviços atualmente
+//
+// Desvantagens
+//   - Espalhamento de código
+//   - Dificuldade de se ter uma estrutura mínima - código inicial
+//   - Adequado apenas Frameworks, Libs e/ou Componentes
 string MenuTemplate::getCursor(){
     return this->Cursor;
 }

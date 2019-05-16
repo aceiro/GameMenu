@@ -34,6 +34,7 @@ namespace MenuTemplate {
 //!
 const string CLEAR_SCREEN_LINUX = "\033[2J\033[1;1H";
 
+
 #ifdef LINUX
 
 const char ENTRY_UP = 'A';
@@ -146,14 +147,27 @@ private:
     string Cursor = "> ";
 
 
-    //!
-    //! @brief      Cursor length
-    //!
-    //! Length used to represents cursor size
-    //!
+    //Q4) Adicionar a quantidade de caracteres do Cursor
+    // Comentário:
+    //------------------------------------------------------------
+    // Nesse caso, optei por criar uma variável (atributo)
+    // da classe que armazena a quantidade de caracteres do Cursor
     int CursorLength;
 
 
+    // Q5)  (continua Passo [4/6])
+    // Aqui nesse passo, difinimos uma variável booleana para
+    // indicar se é = true ou não = false unicode
+    // --------------------------------------------------
+    // isUnicode == true  == 1 ----> é um caracter Unicode
+    // isUnicode == false == 0 ----> é um caracter ASCII
+    bool isUnicode;
+
+
+
+    // Q6) Limite controlável para a Lista-Circular
+    const int LimitEntriesPerMenu = 5;
+    int CursorPositionMenu = CursorStartPosition;
 
     //!
     //! @brief      List of all menu entries.
@@ -202,6 +216,12 @@ private:
     //!
     void addEntry(const string &Name, const string &Text);
 
+    // Q6)
+    // Adicionei duas novas entradas para os métodos da Q6
+    // assim, facilita o entendimento da alteração
+    void addEntry_Q6(const string &Name, const string &Text);
+    void addEntry_Q6(const string &Name, const string &Text, const int &Position);
+
     //!
     //! @brief      Adds new entry to the menu.
     //!
@@ -214,6 +234,7 @@ private:
     //! New entry position must be a value from 0 to number of entries - 1. If set bigger, it will be added to the end.
     //!
     void addEntry(const string &Name, const string &Text, const int &Position);
+
 
     //!
     //! @brief      Deletes entry from menu by name.
@@ -325,6 +346,12 @@ private:
     //!
     void setCursor(const string &Cursor);
 
+
+    // Q5)  (continua Passo [3/x])
+    //      criamos aqui a <<declaração>> 
+    //      para posterirmente <<implementar>> o código
+    void setCursor(const string &Cursor, const bool isUnicode);
+
     //!
     //! @brief      Sets startposition of cursor.
     //!
@@ -375,7 +402,13 @@ private:
     //!
     int getNumberOfEntries();
 
-
+    //Q4) Adicionar a quantidade de caracteres do Cursor
+    // Comentário:
+    // ------------------------------------------------------------
+    // Também foi adicionado dos métodos. Um get e um set.
+    // Lembre-se 
+    //  --> get[NomeDoMetodo] retorna alguma informação
+    //  --> set[NomeDoMetodo] atribui alguma informação - no caso, para um atributo
     void setCursorLength(const int CursorLength);
 
     int getCursorLength();
