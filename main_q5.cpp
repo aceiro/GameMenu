@@ -22,7 +22,7 @@ int main() {
     // Example menu for a game:
     MenuTemplate::MenuTemplate MenuA;
 
-    // Q5) Adicionar o "heart" para o cursor Passo [1/x]
+    // Q5) Adicionar o "heart" para o cursor Passo [1/6]
     // Comentário:
     // ----------------------------------------------------
     // Nesse caso, o primeiro passo é incluir o código Hexadecimal
@@ -43,7 +43,7 @@ int main() {
     MenuA.Title = "\t\tNeverwinter Nights Simple Menu";
     MenuA.Description = "Choose with UP and DOWN, select with RETURN!";
     
-    // Q5)  (continua Passo [2/x])
+    // Q5)  (continua Passo [2/6])
     // é preciso alterar a chamada da rotina para incluir 
     // uma chamada parametrizada agora
     MenuA.setCursor(heart, true);
